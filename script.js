@@ -185,7 +185,7 @@ window.onclick = function(event) {
 let lastTouchEnd = 0;
 document.addEventListener('touchend', function (event) {
     const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {  // 300ms以内に2回タップされた場合は、ズームを防ぐ
+    if (now - lastTouchEnd <= 500) {  // 300ms以内に2回タップされた場合は、ズームを防ぐ
         event.preventDefault();
     }
     lastTouchEnd = now;
