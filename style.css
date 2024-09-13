@@ -36,8 +36,8 @@ body {
 
 /* ボタンスタイル */
 #pulseButton {
-    width: 250px; /* ボタンのサイズを大きく */
-    height: 250px;
+    width: 300px; /* ボタンのサイズを大きく */
+    height: 300px;
     border-radius: 50%;
     background-color: #007bff;
     color: white;
