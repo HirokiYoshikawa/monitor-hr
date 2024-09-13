@@ -88,7 +88,7 @@ function downloadFile(content, fileName) {
 // CSVダウンロード処理（時刻）
 document.getElementById('downloadTimestamps').addEventListener('click', function() {
     const storedTimeStamps = JSON.parse(localStorage.getItem('timeStamps')) || [];
-    let csvContent = 'data:text/csv;charset=utf-8,TimeStamp\n';
+    let csvContent = 'TimeStamp\n';
 
     storedTimeStamps.forEach(function(timeStamp) {
         csvContent += timeStamp + '\n';
@@ -110,7 +110,7 @@ document.getElementById('downloadTimestamps').addEventListener('click', function
 // CSVダウンロード処理（心拍）
 document.getElementById('downloadBpm').addEventListener('click', function() {
     const storedBpmRecords = JSON.parse(localStorage.getItem('bpmRecords')) || [];
-    let csvContent = 'data:text/csv;charset=utf-8,TimeStamp,BPM\n';
+    let csvContent = 'TimeStamp,BPM\n';
 
     storedBpmRecords.forEach(function(record) {
         csvContent += `${record.timestamp},${record.bpm}\n`;
@@ -122,7 +122,7 @@ document.getElementById('downloadBpm').addEventListener('click', function() {
     const fileName = `bpm_${formatFileName(now)}.txt`; // ファイル名に現在の時刻を追加
 
     downloadFile(csvContent, fileName)
-    
+
     // link.setAttribute('href', encodedUri);
     // link.setAttribute('download', fileName);
     // document.body.appendChild(link);
