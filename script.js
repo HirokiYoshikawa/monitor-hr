@@ -73,6 +73,18 @@ function toggleMenu() {
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
+function downloadFile(content, fileName) {
+    const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName); // ダウンロード属性を設定
+    document.body.appendChild(link);
+    link.click(); // ダウンロードを実行
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url); // メモリ解放
+}
+
 // CSVダウンロード処理（時刻）
 document.getElementById('downloadTimestamps').addEventListener('click', function() {
     const storedTimeStamps = JSON.parse(localStorage.getItem('timeStamps')) || [];
@@ -86,11 +98,13 @@ document.getElementById('downloadTimestamps').addEventListener('click', function
     const link = document.createElement('a');
     const now = new Date();
     const fileName = `timestamp_${formatFileName(now)}.csv`; // ファイル名に現在の時刻を追加
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', fileName);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+
+    downloadFile(csvContent, fileName);
+    // link.setAttribute('href', encodedUri);
+    // link.setAttribute('download', fileName);
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
 });
 
 // CSVダウンロード処理（心拍）
@@ -106,11 +120,14 @@ document.getElementById('downloadBpm').addEventListener('click', function() {
     const link = document.createElement('a');
     const now = new Date();
     const fileName = `bpm_${formatFileName(now)}.txt`; // ファイル名に現在の時刻を追加
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', fileName);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+
+    downloadFile(csvContent, fileName)
+    
+    // link.setAttribute('href', encodedUri);
+    // link.setAttribute('download', fileName);
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
 });
 
 // データ消去機能
