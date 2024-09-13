@@ -102,6 +102,16 @@ body {
     background-color: #f0f0f0;
 }
 
+.download-menu {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    font: inherit;
+    padding: 0;
+    cursor: pointer;
+    padding: 16px 4px 16px 16px;
+}
+
 /* モーダルのスタイル */
 .modal {
     display: none; /* 初期状態では非表示 */
