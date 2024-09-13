@@ -36,18 +36,18 @@ body {
 
 /* ボタンスタイル */
 #pulseButton {
-    width: 300px; /* ボタンのサイズを大きく */
-    height: 300px;
+    width: 250px; 
+    height: 250px;
     border-radius: 50%;
     background-color: #007bff;
     color: white;
-    font-size: 32px; /* ボタン内のフォントサイズも大きく */
+    font-size: 32px; 
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: auto; /* ボタンを横中央に配置 */
+    margin: auto;
     position: relative;
 }
 
@@ -77,8 +77,20 @@ body {
 }
 
 .menu-icon {
-    font-size: 32px;
+    font-size: 48px;
     cursor: pointer;
+}
+
+/* オーバーレイのスタイル */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 12;
 }
 
 .menu-content {
@@ -89,7 +101,7 @@ body {
     background-color: white;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    z-index: 1;
+    z-index: 13;
     width: 220px; /* 横幅を設定 */
 }
 
@@ -164,20 +176,20 @@ body {
 /* スマートフォン用のスタイル調整 */
 @media (max-width: 600px) {
     #pulseButton {
-        width: 200px;
-        height: 200px;
+        width: 75vw;
+        height: 75vw;
     }
 
     #bpmValue {
-        font-size: 48px;
+        font-size: 64px;
     }
 
     .bpmText {
-        font-size: 24px;
+        font-size: 36px;
     }
 
     #currentTime {
-        font-size: 28px;
+        font-size: 36px;
     }
 
     .menu-content a {

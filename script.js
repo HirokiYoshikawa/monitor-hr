@@ -67,10 +67,23 @@ function formatFileName(date) {
     return `${yyyy}-${MM}-${dd}-${hh}-${mm}-${ss}`;
 }
 
-// ハンバーガーメニューのトグル処理
 function toggleMenu() {
     const menu = document.getElementById('menu');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    const overlay = document.getElementById('overlay');
+    if (menu.style.display === 'block') {
+        menu.style.display = 'none';
+        overlay.style.display = 'none';
+    } else {
+        menu.style.display = 'block';
+        overlay.style.display = 'block';
+    }
+}
+
+function closeMenu() {
+    const menu = document.getElementById('menu');
+    const overlay = document.getElementById('overlay');
+    menu.style.display = 'none';
+    overlay.style.display = 'none';
 }
 
 function downloadFile(content, fileName) {
@@ -87,6 +100,8 @@ function downloadFile(content, fileName) {
 
 // CSVダウンロード処理（時刻）
 document.getElementById('downloadTimestamps').addEventListener('click', function() {
+    closeMenu();
+
     const storedTimeStamps = JSON.parse(localStorage.getItem('timeStamps')) || [];
     let csvContent = 'TimeStamp\n';
 
@@ -109,6 +124,8 @@ document.getElementById('downloadTimestamps').addEventListener('click', function
 
 // CSVダウンロード処理（心拍）
 document.getElementById('downloadBpm').addEventListener('click', function() {
+    closeMenu();
+
     const storedBpmRecords = JSON.parse(localStorage.getItem('bpmRecords')) || [];
     let csvContent = 'TimeStamp,BPM\n';
 
@@ -132,6 +149,8 @@ document.getElementById('downloadBpm').addEventListener('click', function() {
 
 // データ消去機能
 document.getElementById('deleteData').addEventListener('click', function() {
+    closeMenu();
+    
     const storedTimeStamps = JSON.parse(localStorage.getItem('timeStamps')) || [];
     
     if (storedTimeStamps.length === 0) {
@@ -183,6 +202,7 @@ const usageInstructions = `
 
 // モーダルを開く
 document.getElementById('usageInfo').addEventListener('click', function() {
+    closeMenu();
     usageText.innerHTML = usageInstructions; // innerHTMLでHTMLを挿入
     modal.style.display = 'block';
 });
