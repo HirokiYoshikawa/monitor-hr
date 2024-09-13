@@ -135,3 +135,49 @@ document.getElementById('deleteData').addEventListener('click', function() {
         alert('データが消去されました。');
     }
 });
+
+// モーダルウィンドウの表示と閉じる処理
+const modal = document.getElementById('usageModal');
+const span = document.getElementsByClassName('close')[0];
+const usageText = document.getElementById('usageText');
+
+// 使用方法テキスト
+const usageInstructions = `
+1. <b>心拍数の計算</b>
+ - 画面中央のボタンを脈拍に合わせて2回クリックします。
+ - 2回目のクリック後、心拍数（BPM）がボタンの中に表示されます。
+
+2. <b>データのダウンロード</b>
+ - タイムスタンプのダウンロード:
+  - 画面右上のハンバーガーメニュー（3本線のアイコン）をクリックします。
+  - 「ダウンロード（時刻）」を選択すると、ボタンが押されたタイムスタンプをCSV形式でダウンロードできます。
+  - ファイル名は \`timestamp_yyyy-MM-dd-hh-mm-ss.csv\` という形式になります。
+
+ - 心拍数データのダウンロード:
+  - ハンバーガーメニューをクリックし、「ダウンロード（心拍）」を選択すると、計算された心拍数（BPM）を含むデータをCSV形式でダウンロードできます。
+  - ファイル名は \`bpm_yyyy-MM-dd-hh-mm-ss.csv\` という形式になります。
+
+3. <b>データの消去</b>
+ - データ消去:
+  - ハンバーガーメニューをクリックし、「データ消去」を選択します。
+  - 保存されているデータの最初と最後のタイムスタンプを確認するダイアログが表示され、「[先頭の時刻]〜[最後の時刻]のデータを消去しますか？」と確認されます。
+  - 確認後、データはブラウザから消去されます。
+`;
+
+// モーダルを開く
+document.getElementById('usageInfo').addEventListener('click', function() {
+    usageText.innerHTML = usageInstructions; // innerHTMLでHTMLを挿入
+    modal.style.display = 'block';
+});
+
+// モーダルを閉じる
+span.onclick = function() {
+    modal.style.display = 'none';
+};
+
+// モーダル外をクリックしたときに閉じる
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+};
