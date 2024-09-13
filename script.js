@@ -105,7 +105,7 @@ document.getElementById('downloadBpm').addEventListener('click', function() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     const now = new Date();
-    const fileName = `bpm_${formatFileName(now)}.csv`; // ファイル名に現在の時刻を追加
+    const fileName = `bpm_${formatFileName(now)}.txt`; // ファイル名に現在の時刻を追加
     link.setAttribute('href', encodedUri);
     link.setAttribute('download', fileName);
     document.body.appendChild(link);

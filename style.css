@@ -4,20 +4,24 @@
     box-sizing: border-box;
 }
 
+/* 全体のスクロールを無効化 */
 body {
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: fit-content;
     background-color: #f0f0f0;
     font-family: Arial, sans-serif;
     flex-direction: column;
     padding: 20px;
 }
 
+
 .container {
     text-align: center;
     width: 100%;
+    margin-top: 20vh;
 }
 
 #currentTime {
