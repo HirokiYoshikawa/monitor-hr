@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html, body {
+    touch-action: manipulation;
+}
+
 /* 全体のスクロールを無効化 */
 body {
     overflow: hidden;

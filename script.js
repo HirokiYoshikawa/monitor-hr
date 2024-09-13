@@ -207,3 +207,7 @@ document.addEventListener('touchend', function (event) {
     }
     lastTouchEnd = now;
 }, false);
+
+document.addEventListener('gesturestart', function (event) {
+    event.preventDefault();
+  });
