@@ -69,6 +69,15 @@ body {
     font-size: 28px; /* bpmテキストを大きく */
 }
 
+div#recording-sign {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 16px;
+    background: rgba(0,0,255,0);/*背景色*/
+}
+
 /* ハンバーガーメニュー */
 .hamburger-menu {
     position: absolute;

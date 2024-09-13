@@ -14,6 +14,8 @@ document.getElementById('pulseButton').addEventListener('click', function() {
     
     if (firstClickTime === null) {
         firstClickTime = now;
+        recordSign = document.getElementById('recording-sign');
+        recordSign.style.backgroundColor ="#007bffff";
     } else {
         secondClickTime = now;
         const bpm = calculateBPM();
@@ -26,6 +28,9 @@ document.getElementById('pulseButton').addEventListener('click', function() {
         localStorage.setItem('bpmRecords', JSON.stringify(bpmRecords));
 
         firstClickTime = null; // Reset after calculation
+
+        recordSign = document.getElementById('recording-sign');
+        recordSign.style.backgroundColor = "#007bff00";
     }
 });
 
@@ -40,7 +45,13 @@ function calculateBPM() {
 // 現在時刻を表示する関数
 function updateTime() {
     const now = new Date();
-    const timeString = now.toLocaleTimeString();
+
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    const timeString = `${hours}:${minutes}:${seconds}`;
+
     document.getElementById('currentTime').textContent = timeString;
 }
 
@@ -150,7 +161,7 @@ document.getElementById('downloadBpm').addEventListener('click', function() {
 // データ消去機能
 document.getElementById('deleteData').addEventListener('click', function() {
     closeMenu();
-    
+
     const storedTimeStamps = JSON.parse(localStorage.getItem('timeStamps')) || [];
     
     if (storedTimeStamps.length === 0) {
