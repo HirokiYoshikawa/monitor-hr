@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Rate Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <p id="currentTime"></p>
+        <button id="pulseButton">
+            <div class="bpmDisplay">
+                <span id="bpmValue">[bpm]</span><br>
+                <span class="bpmText">bpm</span>
+            </div>
+        </button>
+    </div>
+    
+    <!-- ハンバーガーメニュー -->
+    <div class="hamburger-menu">
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <div id="menu" class="menu-content">
+            <a href="#" id="downloadTimestamps">ダウンロード（時刻）</a>
+            <a href="#" id="downloadBpm">ダウンロード（心拍）</a>
+            <a href="#" id="deleteData">データ消去</a> <!-- データ消去メニュー追加 -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

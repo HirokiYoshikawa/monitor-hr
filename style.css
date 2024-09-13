@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+}
+
+#currentTime {
+    font-size: 32px; /* テキストサイズを大きく */
+    margin-bottom: 30px; /* マージンを大きく */
+    color: #333;
+}
+
+/* ボタンスタイル */
+#pulseButton {
+    width: 250px; /* ボタンのサイズを大きく */
+    height: 250px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    font-size: 32px; /* ボタン内のフォントサイズも大きく */
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto; /* ボタンを横中央に配置 */
+    position: relative;
+}
+
+#pulseButton:active {
+    background-color: #0056b3;
+}
+
+.bpmDisplay {
+    text-align: center;
+    position: absolute;
+}
+
+#bpmValue {
+    font-size: 64px; /* 心拍数の表示を大きく */
+    font-weight: bold;
+}
+
+.bpmText {
+    font-size: 28px; /* bpmテキストを大きく */
+}
+
+/* ハンバーガーメニュー */
+.hamburger-menu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.menu-icon {
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.menu-content {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1;
+    width: 220px; /* 横幅を設定 */
+}
+
+.menu-content a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 12px 20px; /* パディングを少し増やす */
+    font-size: 18px; /* テキストサイズを大きく */
+    text-align: left;
+}
+
+.menu-content a:hover {
+    background-color: #f0f0f0;
+}
+
+/* スマートフォン用のスタイル調整 */
+@media (max-width: 600px) {
+    #pulseButton {
+        width: 200px;
+        height: 200px;
+    }
+
+    #bpmValue {
+        font-size: 48px;
+    }
+
+    .bpmText {
+        font-size: 24px;
+    }
+
+    #currentTime {
+        font-size: 28px;
+    }
+
+    .menu-content a {
+        font-size: 16px;
+        padding: 10px 16px;
+    }
+}
