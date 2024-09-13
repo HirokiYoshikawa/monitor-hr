@@ -24,6 +24,7 @@
             <a href="#" id="usageInfo">使用方法</a>
             <a href="#" id="downloadTimestamps">ダウンロード（時刻）</a>
             <a href="#" id="downloadBpm">ダウンロード（心拍）</a>
+            <button id="downloadButton">test button</button>
             <a href="#" id="deleteData">データ消去</a>
         </div>
     </div>
@@ -36,7 +37,24 @@
             <div id="usageText"></div>
         </div>
     </div>
-    <button id="downloadButton">test button</button>
+    
     <script src="script.js"></script>
+    <script>
+        function downloadFile(content, fileName) {
+            const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', fileName); // ダウンロード属性を設定
+            document.body.appendChild(link);
+            link.click(); // ダウンロードを実行
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url); // メモリ解放
+        }
+        document.getElementById('downloadButton').addEventListener('click', function () {
+            const content = 'example,csv,data\n1,2,3\n4,5,6';
+            downloadFile(content, 'example.csv');
+        });
+    </script>
 </body>
 </html>
