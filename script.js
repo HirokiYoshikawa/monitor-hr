@@ -37,7 +37,7 @@ document.getElementById('pulseButton').addEventListener('click', function() {
 // BPMを計算する関数
 function calculateBPM() {
     const timeDifference = (secondClickTime - firstClickTime) / 1000; // Difference in seconds
-    const bpm = (60 / timeDifference).toFixed(2);
+    const bpm = (60 / timeDifference).toFixed();
     document.getElementById('bpmValue').textContent = bpm;
     return bpm;
 }
@@ -147,7 +147,7 @@ document.getElementById('downloadBpm').addEventListener('click', function() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
     const now = new Date();
-    const fileName = `bpm_${formatFileName(now)}.txt`; // ファイル名に現在の時刻を追加
+    const fileName = `bpm_${formatFileName(now)}.csv`; // ファイル名に現在の時刻を追加
 
     downloadFile(csvContent, fileName)
 
