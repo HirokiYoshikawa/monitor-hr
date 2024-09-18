@@ -78,6 +78,32 @@ div#recording-sign {
     background: rgba(0,0,255,0);/*背景色*/
 }
 
+#birthButton {
+    width: 100px; /* 中央のボタンの半分の大きさ */
+    height: 100px;
+    border-radius: 50%;
+    background-color: #ffa500;
+    color: white;
+    font-size: 24px; /* テキストサイズは中央のボタンの半分 */
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: calc(50% - 125px); /* 左側の配置 */
+    bottom: calc(50% - 35vh);
+}
+
+#birthButton:active {
+    background-color: #cd853f;
+}
+
+.birthLabel {
+    text-align: center;
+}
+
+
 /* ハンバーガーメニュー */
 .hamburger-menu {
     position: absolute;
@@ -173,6 +199,39 @@ div#recording-sign {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* モーダルのスタイル */
+.birth-modal {
+    visibility: hidden; /* 初期状態では見えない */
+    position: fixed;
+    top: -5vh; /* 初期状態では画面の外 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000;
+    opacity: 0; /* 初期状態では透明 */
+    transition: top 0.5s ease, opacity 0.5s ease, visibility 0s 0.5s; /* visibilityは遅延処理 */
+}
+
+/* モーダルが表示されているとき */
+.birth-modal.show {
+    visibility: visible; /* 表示 */
+    top: 5vh; /* 表示時の位置を画面の上部に設定 */
+    opacity: 1; /* モーダルを不透明に */
+    transition: top 0.5s ease, opacity 0.5s ease; /* アニメーション */
+}
+
+/* モーダルのコンテンツ */
+.birth-modal-content {
+    font-size: 16px;
+    color: #333;
 }
 
 #usageText {

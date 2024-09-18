@@ -21,7 +21,7 @@ document.getElementById('pulseButton').addEventListener('click', function() {
         const bpm = calculateBPM();
         
         // タイムスタンプと心拍数を保存
-        timeStamps.push(formattedTime);
+        timeStamps.push({ timestamp: formattedTime, label: "bpm" });
         bpmRecords.push({ timestamp: formattedTime, bpm: bpm });
 
         localStorage.setItem('timeStamps', JSON.stringify(timeStamps));
@@ -113,11 +113,11 @@ function downloadFile(content, fileName) {
 document.getElementById('downloadTimestamps').addEventListener('click', function() {
     closeMenu();
 
-    const storedTimeStamps = JSON.parse(localStorage.getItem('timeStamps')) || [];
-    let csvContent = 'TimeStamp\n';
+    let csvContent = 'TimeStamp,Label\n';
 
-    storedTimeStamps.forEach(function(timeStamp) {
-        csvContent += timeStamp + '\n';
+    const storedTimestampRecords = JSON.parse(localStorage.getItem('timeStamps')) || [];
+    storedTimestampRecords.forEach(function(record) {
+        csvContent += `${record.timestamp},${record.label}\n`;
     });
 
     const encodedUri = encodeURI(csvContent);
@@ -190,11 +190,16 @@ const usageText = document.getElementById('usageText');
 
 // 使用方法テキスト
 const usageInstructions = `
-1. <b>心拍数の計算</b>
+
+1. <b>出生時刻の記録</b>
+ - 画面左下のボタンをクリックすることで出生時刻が記録されます。
+ - ダウンロード（時刻）から記録をダウンロードできます。
+
+2. <b>心拍数の計算</b>
  - 画面中央のボタンを脈拍に合わせて2回クリックします。
  - 2回目のクリック後、心拍数（BPM）がボタンの中に表示されます。
 
-2. <b>データのダウンロード</b>
+3. <b>データのダウンロード</b>
  - タイムスタンプのダウンロード:
   - 画面右上のハンバーガーメニュー（3本線のアイコン）をクリックします。
   - 「ダウンロード（時刻）」を選択すると、ボタンが押されたタイムスタンプをCSV形式でダウンロードできます。
@@ -204,7 +209,7 @@ const usageInstructions = `
   - ハンバーガーメニューをクリックし、「ダウンロード（心拍）」を選択すると、計算された心拍数（BPM）を含むデータをCSV形式でダウンロードできます。
   - ファイル名は \`bpm_yyyy-MM-dd-hh-mm-ss.csv\` という形式になります。
 
-3. <b>データの消去</b>
+4. <b>データの消去</b>
  - データ消去:
   - ハンバーガーメニューをクリックし、「データ消去」を選択します。
   - 保存されているデータの最初と最後のタイムスタンプを確認するダイアログが表示され、「[先頭の時刻]〜[最後の時刻]のデータを消去しますか？」と確認されます。
@@ -230,6 +235,22 @@ window.onclick = function(event) {
     }
 };
 
+document.getElementById('birthButton').addEventListener('click', function () {
+    const now = new Date();
+    const formattedTime = formatDate(now);
+    timeStamps.push({ timestamp: formattedTime, label: "birth" });
+
+    const birthModal = document.getElementById('birthModal');
+    
+    // モーダルを表示する
+    birthModal.classList.add('show');
+    
+    // 2秒後にモーダルを非表示にする
+    setTimeout(function () {
+        birthModal.classList.remove('show');
+    }, 2000);
+});
+
 document.addEventListener('gesturestart', function (event) {
     event.preventDefault();
-  });
+});
