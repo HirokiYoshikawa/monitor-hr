@@ -113,12 +113,23 @@ function downloadFile(content, fileName) {
 document.getElementById('downloadTimestamps').addEventListener('click', function() {
     closeMenu();
 
-    let csvContent = 'TimeStamp,Label\n';
+    let csvContent = 'TimeStamp,BPM,Label\n';
 
     const storedTimestampRecords = JSON.parse(localStorage.getItem('timeStamps')) || [];
-    storedTimestampRecords.forEach(function(record) {
-        csvContent += `${record.timestamp},${record.label}\n`;
-    });
+    const storedBpmRecords = JSON.parse(localStorage.getItem('bpmRecords')) || [];
+
+    // storedTimestampRecords.forEach(function(record) {
+    //     csvContent += `${record.timestamp},${record.label}\n`;
+    // });
+    bpmIndex = 0;
+    for (let i = 0; i < storedTimestampRecords.length; i++) {
+        if (storedTimestampRecords[i].label == "bpm") {
+            csvContent += `${storedTimestampRecords[i].timestamp},${storedBpmRecords[bpmIndex].bpm},${storedTimestampRecords[i].label}`;
+            bpmIndex += 1;
+        } else {
+            csvContent += `${storedTimestampRecords[i].timestamp},,${storedTimestampRecords[i].label}`;
+        }
+    }
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
@@ -202,12 +213,8 @@ const usageInstructions = `
 3. <b>データのダウンロード</b>
  - タイムスタンプのダウンロード:
   - 画面右上のハンバーガーメニュー（3本線のアイコン）をクリックします。
-  - 「ダウンロード（時刻）」を選択すると、ボタンが押されたタイムスタンプをCSV形式でダウンロードできます。
+  - 「ダウンロード」を選択すると、計算された心拍数（BPM）とボタンが押されたタイムスタンプをCSV形式でダウンロードできます。
   - ファイル名は \`timestamp_yyyy-MM-dd-hh-mm-ss.csv\` という形式になります。
-
- - 心拍数データのダウンロード:
-  - ハンバーガーメニューをクリックし、「ダウンロード（心拍）」を選択すると、計算された心拍数（BPM）を含むデータをCSV形式でダウンロードできます。
-  - ファイル名は \`bpm_yyyy-MM-dd-hh-mm-ss.csv\` という形式になります。
 
 4. <b>データの消去</b>
  - データ消去:
