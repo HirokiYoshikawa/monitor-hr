@@ -124,10 +124,10 @@ document.getElementById('downloadTimestamps').addEventListener('click', function
     bpmIndex = 0;
     for (let i = 0; i < storedTimestampRecords.length; i++) {
         if (storedTimestampRecords[i].label == "bpm") {
-            csvContent += `${storedTimestampRecords[i].timestamp},${storedBpmRecords[bpmIndex].bpm},${storedTimestampRecords[i].label}`;
+            csvContent += `${storedTimestampRecords[i].timestamp},${storedBpmRecords[bpmIndex].bpm},${storedTimestampRecords[i].label}\n`;
             bpmIndex += 1;
         } else {
-            csvContent += `${storedTimestampRecords[i].timestamp},,${storedTimestampRecords[i].label}`;
+            csvContent += `${storedTimestampRecords[i].timestamp},,${storedTimestampRecords[i].label}\n`;
         }
     }
 
@@ -145,29 +145,23 @@ document.getElementById('downloadTimestamps').addEventListener('click', function
 });
 
 // CSVダウンロード処理（心拍）
-document.getElementById('downloadBpm').addEventListener('click', function() {
-    closeMenu();
+// document.getElementById('downloadBpm').addEventListener('click', function() {
+//     closeMenu();
 
-    const storedBpmRecords = JSON.parse(localStorage.getItem('bpmRecords')) || [];
-    let csvContent = 'TimeStamp,BPM\n';
+//     const storedBpmRecords = JSON.parse(localStorage.getItem('bpmRecords')) || [];
+//     let csvContent = 'TimeStamp,BPM\n';
 
-    storedBpmRecords.forEach(function(record) {
-        csvContent += `${record.timestamp},${record.bpm}\n`;
-    });
+//     storedBpmRecords.forEach(function(record) {
+//         csvContent += `${record.timestamp},${record.bpm}\n`;
+//     });
 
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    const now = new Date();
-    const fileName = `bpm_${formatFileName(now)}.csv`; // ファイル名に現在の時刻を追加
+//     const encodedUri = encodeURI(csvContent);
+//     const link = document.createElement('a');
+//     const now = new Date();
+//     const fileName = `bpm_${formatFileName(now)}.csv`; // ファイル名に現在の時刻を追加
 
-    downloadFile(csvContent, fileName)
-
-    // link.setAttribute('href', encodedUri);
-    // link.setAttribute('download', fileName);
-    // document.body.appendChild(link);
-    // link.click();
-    // document.body.removeChild(link);
-});
+//     downloadFile(csvContent, fileName)
+// });
 
 // データ消去機能
 document.getElementById('deleteData').addEventListener('click', function() {
@@ -182,7 +176,9 @@ document.getElementById('deleteData').addEventListener('click', function() {
 
     const firstTimeStamp = storedTimeStamps[0];
     const lastTimeStamp = storedTimeStamps[storedTimeStamps.length - 1];
-    const confirmationMessage = `${firstTimeStamp}\n〜\n${lastTimeStamp}\nのデータを消去しますか？`;
+    console.log(firstTimeStamp);
+    console.log(lastTimeStamp);
+    const confirmationMessage = `${firstTimeStamp.timestamp}\n〜\n${lastTimeStamp.timestamp}\nのデータを消去しますか？`;
 
     if (confirm(confirmationMessage)) {
         // データ消去
