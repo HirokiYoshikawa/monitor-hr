@@ -104,11 +104,11 @@ div#recording-sign {
 }
 
 #respirationButton {
-    background-color: #aadd33;
+    background-color: #88bb11;
 }
 
 #respirationButton:active {
-    background-color: #88bb11;
+    background-color: #66aa11;
 }
 
 .birthLabel {
