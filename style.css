@@ -69,22 +69,46 @@ div#recording-sign {
     background: rgba(0,0,255,0);/*背景色*/
 }
 
-#birthButton {
-    width: 100px; /* 中央のボタンの半分の大きさ */
+/* ボタンを横に並べるためのコンテナ */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* ボタン間のスペース */
+    margin-top: 3vh;
+}
+
+/* 「出生」ボタンと「人工呼吸開始」ボタンの共通スタイル */
+#birthButton, #respirationButton {
+    width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: #ffa500;
     color: white;
-    font-size: 24px; /* テキストサイズは中央のボタンの半分 */
+    font-size: 18px; /* テキストサイズを調整 */
     border: none;
     cursor: pointer;
+    display: flex; /* コンテンツを中央に配置 */
+    align-items: center;
     justify-content: center;
-    margin-top: 3vh;
-    left: calc(50%-100px);
+    text-align: center;
+    padding: 5px;
+}
+
+#birthButton {
+    background-color: #ffa500;
 }
 
 #birthButton:active {
     background-color: #cd853f;
+}
+
+#respirationButton {
+    background-color: #aadd33;
+}
+
+#respirationButton:active {
+    background-color: #88bb11;
 }
 
 .birthLabel {
@@ -217,7 +241,7 @@ div#recording-sign {
 }
 
 /* モーダルのコンテンツ */
-.birth-modal-content {
+#birth-modal-content {
     font-size: 16px;
     color: #333;
 }

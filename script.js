@@ -1,7 +1,9 @@
 let firstClickTime = null;
 let secondClickTime = null;
-let timeStamps = [];
-let bpmRecords = [];
+// localStorageからデータを取得して配列を復元
+let timeStamps = JSON.parse(localStorage.getItem('timeStamps')) || [];
+let bpmRecords = JSON.parse(localStorage.getItem('bpmRecords')) || [];
+
 
 // 初期化時に時刻を常に表示する
 updateTime();
@@ -125,9 +127,11 @@ document.getElementById('downloadTimestamps').addEventListener('click', function
     for (let i = 0; i < storedTimestampRecords.length; i++) {
         if (storedTimestampRecords[i].label == "bpm") {
             csvContent += `${storedTimestampRecords[i].timestamp},${storedBpmRecords[bpmIndex].bpm},${storedTimestampRecords[i].label}\n`;
+            console.log(`${storedTimestampRecords[i].timestamp},${storedBpmRecords[bpmIndex].bpm},${storedTimestampRecords[i].label}\n`)
             bpmIndex += 1;
         } else {
             csvContent += `${storedTimestampRecords[i].timestamp},,${storedTimestampRecords[i].label}\n`;
+            console.log(`${storedTimestampRecords[i].timestamp},,${storedTimestampRecords[i].label}\n`)
         }
     }
 
@@ -137,31 +141,8 @@ document.getElementById('downloadTimestamps').addEventListener('click', function
     const fileName = `timestamp_${formatFileName(now)}.csv`; // ファイル名に現在の時刻を追加
 
     downloadFile(csvContent, fileName);
-    // link.setAttribute('href', encodedUri);
-    // link.setAttribute('download', fileName);
-    // document.body.appendChild(link);
-    // link.click();
-    // document.body.removeChild(link);
+
 });
-
-// CSVダウンロード処理（心拍）
-// document.getElementById('downloadBpm').addEventListener('click', function() {
-//     closeMenu();
-
-//     const storedBpmRecords = JSON.parse(localStorage.getItem('bpmRecords')) || [];
-//     let csvContent = 'TimeStamp,BPM\n';
-
-//     storedBpmRecords.forEach(function(record) {
-//         csvContent += `${record.timestamp},${record.bpm}\n`;
-//     });
-
-//     const encodedUri = encodeURI(csvContent);
-//     const link = document.createElement('a');
-//     const now = new Date();
-//     const fileName = `bpm_${formatFileName(now)}.csv`; // ファイル名に現在の時刻を追加
-
-//     downloadFile(csvContent, fileName)
-// });
 
 // データ消去機能
 document.getElementById('deleteData').addEventListener('click', function() {
@@ -242,8 +223,11 @@ document.getElementById('birthButton').addEventListener('click', function () {
     const now = new Date();
     const formattedTime = formatDate(now);
     timeStamps.push({ timestamp: formattedTime, label: "birth" });
+    localStorage.setItem('timeStamps', JSON.stringify(timeStamps));
 
     const birthModal = document.getElementById('birthModal');
+    let modalText = document.getElementById('birth-modal-content')
+    modalText.textContent = '出生ボタンが押されました'
     
     // モーダルを表示する
     birthModal.classList.add('show');
@@ -251,6 +235,25 @@ document.getElementById('birthButton').addEventListener('click', function () {
     // 2秒後にモーダルを非表示にする
     setTimeout(function () {
         birthModal.classList.remove('show');
+    }, 2000);
+});
+
+document.getElementById('respirationButton').addEventListener('click', function () {
+    const now = new Date();
+    const formattedTime = formatDate(now);
+    timeStamps.push({ timestamp: formattedTime, label: "respiration" });
+    localStorage.setItem('timeStamps', JSON.stringify(timeStamps));
+
+    const modal = document.getElementById('birthModal');
+    let modalText = document.getElementById('birth-modal-content')
+    modalText.textContent = '人工呼吸開始ボタンが押されました'
+    
+    // モーダルを表示する
+    modal.classList.add('show');
+    
+    // 2秒後にモーダルを非表示にする
+    setTimeout(function () {
+        modal.classList.remove('show');
     }, 2000);
 });
 

@@ -16,10 +16,17 @@
             </div>
         </button>
         <div id="recording-sign"></div>
-        <button id="birthButton">
-            <div class="birthLabel">出生</div>
-        </button>
+        <!-- ボタンを包む新しいコンテナを追加 -->
+        <div class="button-container">
+            <button id="birthButton">
+                <div class="birthLabel">出生</div>
+            </button>
+            <button id="respirationButton">
+                <div class="respirationLabel">人工呼吸<br>開始</div>
+            </button>
+        </div>
     </div>
+    
     
     <!-- ハンバーガーメニュー -->
     <div class="hamburger-menu">
@@ -43,7 +50,7 @@
     </div>
 
     <div id="birthModal" class="birth-modal">
-        <div class="birth-modal-content">出生ボタンが押されました</div>
+        <div id="birth-modal-content">出生ボタンが押されました</div>
     </div>
     
     <script src="script.js"></script>
