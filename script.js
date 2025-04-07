@@ -41,6 +41,17 @@ function calculateBPM() {
     const timeDifference = (secondClickTime - firstClickTime) / 1000; // Difference in seconds
     const bpm = (60 / timeDifference).toFixed();
     document.getElementById('bpmValue').textContent = bpm;
+
+    // 背景色をBPMに応じて変更
+    const bpmNumber = parseInt(bpm);
+    if (bpmNumber <= 60) {
+        document.body.style.backgroundColor = '#f5c6cb';
+    } else if (bpmNumber > 60 && bpmNumber < 100) {
+        document.body.style.backgroundColor = '#ffeeba';
+    } else if (bpmNumber >= 100) {
+        document.body.style.backgroundColor = '#bee5eb';
+    }
+
     return bpm;
 }
 
